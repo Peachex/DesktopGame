@@ -9,14 +9,10 @@ import com.badlogic.gdx.math.Vector2;
 public class Spaceship {
     Texture img;
     Vector2 pos;
-    float vx;
-    float vy;
 
     public Spaceship() {
         this.img = new Texture("spaceship1.png");
         this.pos = new Vector2(600, 0);
-        this.vx = 0;
-        this.vy = 0;
     }
 
     public void render(SpriteBatch batch) {
@@ -37,7 +33,6 @@ public class Spaceship {
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             pos.x += - 4;
         }
-
     }
 
     public void outOfMap() {
@@ -53,13 +48,5 @@ public class Spaceship {
         if (pos.y < -150) {
             pos.y = 650;
         }
-    }
-
-    public Vector2 getPos() {
-        return pos;
-    }
-
-    public void setPos(Vector2 pos) {
-        this.pos = pos;
     }
 }

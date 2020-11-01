@@ -1,11 +1,8 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Circle;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 import java.util.Random;
@@ -32,7 +29,7 @@ public class Enemy {
         batch.draw(img, pos.x, pos.y);
     }
 
-    public void update() {
+    public void update(Spaceship spaceship) {
         if (this.pos.x < -150) {
             this.pos.x = 1280;
             this.pos.y = random.nextInt(641) + 10;
@@ -47,6 +44,17 @@ public class Enemy {
         }
         circle.x -= speed;
         this.pos.x -= this.speed;
+        isEnemyAlive(spaceship);
+    }
+
+    public boolean isEnemyAlive(Spaceship spaceship) {
+        if (this.circle.contains(spaceship.pos)) {
+            this.setPos(new Vector2(1280, random.nextInt(641) + 10));
+            this.circle.x = this.pos.x;
+            this.circle.y = this.pos.y;
+            return false;
+        }
+        return true;
     }
 
     public Vector2 getPos() {
@@ -55,13 +63,5 @@ public class Enemy {
 
     public void setPos(Vector2 pos) {
         this.pos = pos;
-    }
-
-    public Circle getCircle() {
-        return circle;
-    }
-
-    public void setCircle(Circle circle) {
-        this.circle = circle;
     }
 }

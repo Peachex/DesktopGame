@@ -10,7 +10,6 @@ public class MyGdxGame extends ApplicationAdapter {
     Background bg;
     Spaceship spaceship;
     Enemy enemy;
-    Logic logic;
 
     @Override
     public void create() {
@@ -18,7 +17,6 @@ public class MyGdxGame extends ApplicationAdapter {
         bg = new Background();
         spaceship = new Spaceship();
         enemy = new Enemy();
-        logic = new Logic();
     }
 
     @Override
@@ -36,8 +34,7 @@ public class MyGdxGame extends ApplicationAdapter {
     public void update() {
         this.bg.update();
         this.spaceship.update();
-        this.enemy.update();
-        this.logic.update(this.spaceship, this.enemy);
+        this.enemy.update(spaceship);
     }
 
     @Override
