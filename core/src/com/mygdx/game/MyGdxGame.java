@@ -9,12 +9,16 @@ public class MyGdxGame extends ApplicationAdapter {
     SpriteBatch batch;
     Background bg;
     Spaceship spaceship;
+    Enemy enemy;
+    Logic logic;
 
     @Override
     public void create() {
         batch = new SpriteBatch();
         bg = new Background();
         spaceship = new Spaceship();
+        enemy = new Enemy();
+        logic = new Logic();
     }
 
     @Override
@@ -25,12 +29,15 @@ public class MyGdxGame extends ApplicationAdapter {
         batch.begin();
         this.bg.render(this.batch);
         this.spaceship.render(this.batch);
+        this.enemy.render(this.batch);
         batch.end();
     }
 
     public void update() {
         this.bg.update();
         this.spaceship.update();
+        this.enemy.update();
+        this.logic.update(this.spaceship, this.enemy);
     }
 
     @Override

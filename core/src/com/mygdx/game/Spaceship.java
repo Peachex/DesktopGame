@@ -54,4 +54,12 @@ public class Spaceship {
             pos.y = 650;
         }
     }
+
+    public Vector2 getPos() {
+        return pos;
+    }
+
+    public void setPos(Vector2 pos) {
+        this.pos = pos;
+    }
 }
