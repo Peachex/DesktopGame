@@ -13,6 +13,7 @@ public class MyGdxGame extends ApplicationAdapter {
     Spaceship spaceship;
     Enemy enemy;
     Texture gameOverTexture;
+    Texture win;
 
     @Override
     public void create() {
@@ -21,6 +22,7 @@ public class MyGdxGame extends ApplicationAdapter {
         spaceship = new Spaceship();
         enemy = new Enemy();
         gameOverTexture = new Texture("gameOver.jpg");
+        win = new Texture("win.jpg");
     }
 
     @Override
@@ -30,11 +32,17 @@ public class MyGdxGame extends ApplicationAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
         this.bg.render(this.batch);
-        if (!enemy.isGameOver) {
+        if (!enemy.isGameOver && !enemy.isWin) {
             this.spaceship.render(this.batch);
             this.enemy.render(this.batch);
         } else {
-            batch.draw(gameOverTexture, 10, 0);
+            if (enemy.isGameOver) {
+                batch.draw(gameOverTexture, 10, 0);
+            } else {
+                if (enemy.isWin) {
+                    batch.draw(win, 20, 0);
+                }
+            }
         }
         batch.end();
     }
@@ -47,7 +55,10 @@ public class MyGdxGame extends ApplicationAdapter {
             spaceship.recreate();
             enemy.recreate();
             enemy.life = 3;
+            enemy.count = 0;
             enemy.isGameOver = false;
+            enemy.isWin = false;
+            enemy.speed = 6;
         }
     }
 

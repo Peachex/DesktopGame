@@ -21,7 +21,7 @@ public class Enemy {
     public Enemy() {
         this.img = new Texture("enemy.png");
         this.pos = new Vector2(1280, random.nextInt(641) + 10);
-        this.speed = 4;
+        this.speed = 6;
         this.count = 0;
         this.isGameOver = false;
         this.isWin = false;
@@ -37,7 +37,7 @@ public class Enemy {
         if (life <= 0) {
             isGameOver = true;
         }
-        if (count == 1) {
+        if (count == 10) {
             isWin = true;
         }
         if (this.pos.x < -150) {
@@ -46,10 +46,7 @@ public class Enemy {
             circle.y = pos.y;
             circle.x = pos.x;
             life--;
-        }
-        if (count == 3 && this.speed < 10) {
-            this.speed += 2;
-            this.count = 0;
+            this.speed += 4;
         }
         circle.x -= speed;
         this.pos.x -= this.speed;
