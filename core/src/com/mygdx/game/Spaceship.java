@@ -12,7 +12,7 @@ public class Spaceship {
 
     public Spaceship() {
         this.img = new Texture("spaceship1.png");
-        this.pos = new Vector2(600, 0);
+        this.pos = new Vector2(100, 360);
     }
 
     public void render(SpriteBatch batch) {
@@ -48,5 +48,9 @@ public class Spaceship {
         if (pos.y < -150) {
             pos.y = 650;
         }
+    }
+
+    public void recreate() {
+        this.pos = new Vector2(100, 360);
     }
 }

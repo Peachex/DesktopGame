@@ -12,7 +12,9 @@ public class Enemy {
     Vector2 pos;
     float speed;
     long count;
-    boolean isAlive;
+    boolean isGameOver;
+    boolean isWin;
+    int life;
     Circle circle;
     Random random = new Random();
 
@@ -21,7 +23,9 @@ public class Enemy {
         this.pos = new Vector2(1280, random.nextInt(641) + 10);
         this.speed = 4;
         this.count = 0;
-        this.isAlive = true;
+        this.isGameOver = false;
+        this.isWin = false;
+        life = 3;
         circle = new Circle(pos.x, pos.y, 156);
     }
 
@@ -30,13 +34,18 @@ public class Enemy {
     }
 
     public void update(Spaceship spaceship) {
+        if (life <= 0) {
+            isGameOver = true;
+        }
+        if (count == 1) {
+            isWin = true;
+        }
         if (this.pos.x < -150) {
             this.pos.x = 1280;
             this.pos.y = random.nextInt(641) + 10;
             circle.y = pos.y;
             circle.x = pos.x;
-            isAlive = false;
-            count++;
+            life--;
         }
         if (count == 3 && this.speed < 10) {
             this.speed += 2;
@@ -52,9 +61,14 @@ public class Enemy {
             this.setPos(new Vector2(1280, random.nextInt(641) + 10));
             this.circle.x = this.pos.x;
             this.circle.y = this.pos.y;
+            count++;
             return false;
         }
         return true;
+    }
+
+    public void recreate() {
+        this.setPos(new Vector2(1280, random.nextInt(641) + 10));
     }
 
     public Vector2 getPos() {
@@ -63,5 +77,13 @@ public class Enemy {
 
     public void setPos(Vector2 pos) {
         this.pos = pos;
+    }
+
+    public int getLife() {
+        return life;
+    }
+
+    public void setLife(int life) {
+        this.life = life;
     }
 }
